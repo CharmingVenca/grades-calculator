@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kalkulačka průměrů">
+    <meta name="keywords" content="Calculator, free, grades, school, czech, english">
+    <meta name="author" content="Václav Klimeš">
+    <script src="script.js"></script>
+    <link rel="icon" type="image/jpeg" sizes="100x100" href="cg-logo.jpeg">
+    <link rel="stylesheet" href="style.css">
+    <title>Grades Calculator</title>
+</head>
+<body>
+<header class="header">
+    <h1>Kalkulačka průměrů</h1>
+</header>
+<main class="flex-container">
+    <section class="calculator">
+        <h3>Dle známky</h3>
+
+        <label for="grade-avg-1"><h5>Aktuální průměr</h5></label>
+        <input type="text" id="grade-avg-1" class="grade-avg">
+
+        <label for="grade-total-weight-1"><h5>Celková váha známek</h5></label>
+        <input type="text" id="grade-total-weight-1" class="grade-total-weight">
+
+        <label for="next-grade-weight-1"><h5>Váha další známky</h5></label>
+        <input type="text" id="next-grade-weight-1" class="next-grade-weight">
+
+        <label for="target-grade-percentage"><h5>Cílová známka %</h5></label>
+        <input type="text" id="target-grade-percentage" class="target-grade-percentage">
+
+        <button onclick="getMinGrade()">Spočti známku</button>
+        <h3 class="minGradeResult">Výsledek se zobrazí zde</h3>
+    </section>
+    <section class="calculator">
+        <h3>Dle průměru</h3>
+
+        <label for="grade-avg-2"><h5>Aktuální průměr</h5></label>
+        <input type="text" id="grade-avg-2" class="grade-avg">
+
+        <label for="grade-total-weight-2"><h5>Celková váha známek</h5></label>
+        <input type="text" id="grade-total-weight-2" class="grade-total-weight">
+
+        <label for="next-grade-weight-2"><h5>Váha další známky</h5></label>
+        <input type="text" id="next-grade-weight-2" class="next-grade-weight">
+
+        <label for="next-grade"><h5>Další známka</h5></label>
+        <input type="text" id="next-grade" class="next-grade">
+
+        <button onclick="getAverage('average')">Spočti průměr</button>
+        <h3 class="new-average">Výsledek se zobrazí zde</h3>
+    </section>
+</main>
+<footer class="footer">
+    <p>Inspired by Michal Škoula, made by Václav Klimeš</p>
+    <a class="icon" href="https://github.com/CharmingVenca/grades-calculator">
+        <img src="github.svg" alt="Github">
+    </a>
+</footer>
+</body>
+</html>
