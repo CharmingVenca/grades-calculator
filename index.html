@@ -7,7 +7,7 @@
     <meta name="description" content="Kalkulačka průměrů">
     <meta name="keywords" content="Calculator, free, grades, school, czech, english">
     <meta name="author" content="Václav Klimeš">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <link rel="icon" type="image/jpeg" sizes="100x100" href="cg-logo.jpeg">
     <link rel="stylesheet" href="style.css">
     <title>Grades Calculator</title>
@@ -50,7 +50,7 @@
         <label for="next-grade"><h5>Další známka</h5></label>
         <input type="text" id="next-grade" class="next-grade">
 
-        <button onclick="getAverage('average')">Spočti průměr</button>
+        <button onclick="getAverage()">Spočti průměr</button>
         <h3 class="new-average">Výsledek se zobrazí zde</h3>
     </section>
 </main>

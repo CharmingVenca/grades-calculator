@@ -1,21 +1,26 @@
-function calculateGrade(result, inputs, i = 0) {
+function calculateGrade(inputs, i = 0) {
     if (i > 101) {
         inputs.results.innerText = `Tak z tohohle se už nedostaneš...`;
         return;
     }
 
-    result = getAverage(inputs.gradeAvg, inputs.gradeTotalWeight, i, inputs.nextGradeWeight);
+    let result = getAverage(inputs.gradeAvg, inputs.gradeTotalWeight, i, inputs.nextGradeWeight);
 
     if (result >= inputs.targetGradePercentage) {
         inputs.results.innerText = `Potřebuješ nejméně ${i}`;
         return;
     }
 
-    return calculateGrade(result, inputs, i + 1);
+    return calculateGrade(inputs, i + 1);
+}
+
+function getAverage(gradeAvg, gradeTotalWeight, nextGrade, nextGradeWeight) {
+    return ((gradeAvg * gradeTotalWeight + nextGrade * nextGradeWeight) / (gradeTotalWeight + nextGradeWeight));
 }
 
 function parseNumberInput(value) {
     value = value.replace(',', '.');
+    value = value.replace('-', '');
     return parseFloat(value);
 }
 
@@ -28,14 +33,14 @@ function getMinGrade() {
         results: document.querySelector('.minGradeResult')
     };
 
-    if (inputs.gradeAvg && inputs.gradeTotalWeight && inputs.nextGradeWeight && inputs.targetGradePercentage) {
-        calculateGrade(0, inputs);
+    if (!isNaN(inputs.gradeAvg) && !isNaN(inputs.gradeTotalWeight) && !isNaN(inputs.nextGradeWeight) && !isNaN(inputs.targetGradePercentage)) {
+        calculateGrade(inputs);
     } else {
         inputs.results.innerText = `Prosím vyplň všechny pole.`;
     }
 }
 
-function getAverage() {
+function getAverageNew() {
     let inputs = {
         gradeAvg: parseNumberInput(document.getElementById('grade-avg-2').value),
         gradeTotalWeight: parseNumberInput(document.getElementById('grade-total-weight-2').value),
@@ -45,16 +50,38 @@ function getAverage() {
     };
 
     function calculateAverage(inputs) {
-        return (inputs.gradeAvg * inputs.grade + inputs.nextGrade * inputs.nextGradeWeight) / inputs.nextGradeWeight + inputs.gradeTotalWeight;
+        return (inputs.gradeAvg * inputs.gradeTotalWeight + inputs.nextGrade * inputs.nextGradeWeight) / (inputs.gradeTotalWeight + inputs.nextGradeWeight);
     }
 
-    if (inputs.gradeAvg && inputs.gradeTotalWeight && inputs.nextGradeWeight && inputs.targetGradePercentage) {
-        inputs.results.innerText = `Potřebuješ nejméně ${calculateAverage(inputs)}`;
+    if (!isNaN(inputs.gradeAvg) && !isNaN(inputs.gradeTotalWeight) && !isNaN(inputs.nextGradeWeight) && !isNaN(inputs.nextGrade)) {
+        let newAverage = calculateAverage(inputs).toFixed(2);
+        console.log('New Average:', newAverage); // Debugging log
+        inputs.results.innerText = `Nový průměr je ${newAverage}`;
     } else {
         inputs.results.innerText = `Prosím vyplň všechny pole.`;
     }
 }
 
-function getAverage(gradeAvg = 0, gradeTotalWeight = 0, i = 0, nextGradeWeight = 0) {
-    return ((gradeAvg * gradeTotalWeight + i * nextGradeWeight) / (gradeTotalWeight + nextGradeWeight));
-}
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('button')[0].addEventListener('click', getMinGrade);
+    document.querySelectorAll('button')[1].addEventListener('click', getAverageNew);
+
+    // Add keydown event listeners to input fields
+    const inputFields1 = document.querySelectorAll('#grade-avg-1, #grade-total-weight-1, #next-grade-weight-1, #target-grade-percentage');
+    inputFields1.forEach(input => {
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                getMinGrade();
+            }
+        });
+    });
+
+    const inputFields2 = document.querySelectorAll('#grade-avg-2, #grade-total-weight-2, #next-grade-weight-2, #next-grade');
+    inputFields2.forEach(input => {
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                getAverageNew();
+            }
+        });
+    });
+});
