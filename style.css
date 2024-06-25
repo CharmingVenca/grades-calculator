@@ -154,6 +154,7 @@ button:hover {
     input {
         background-color: var(--container-dark);
         border: 1px solid #555;
+        color: var(--button-text-color-light);
     }
     button {
         background-color: var(--button-color-dark);
