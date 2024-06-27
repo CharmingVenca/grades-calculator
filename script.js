@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('button')[0].addEventListener('click', getMinGrade);
     document.querySelectorAll('button')[1].addEventListener('click', getAverageNew);
 
-    // Add keydown event listeners to input fields
     const inputFields1 = document.querySelectorAll('#grade-avg-1, #grade-total-weight-1, #next-grade-weight-1, #target-grade-percentage');
     inputFields1.forEach(input => {
         input.addEventListener('keydown', function(event) {
